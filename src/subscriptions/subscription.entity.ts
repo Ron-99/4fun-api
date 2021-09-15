@@ -8,10 +8,10 @@ export class Subscription {
   id: number;
 
   @ManyToOne(() => Driver, (driver) => driver.subscriptions)
-  @JoinColumn()
+  @JoinColumn({ name: 'driver_id' })
   driver: Driver;
 
   @ManyToOne(() => Season, (season) => season.subscriptions)
-  @JoinColumn()
+  @JoinColumn({ name: 'season_id' })
   season: Season;
 }
