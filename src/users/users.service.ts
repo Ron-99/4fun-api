@@ -45,7 +45,7 @@ export class UsersService {
       .select('User.email')
       .innerJoin('User.driver', 'drivers')
       .innerJoin('drivers.subscriptions', 'subscriptions')
-      .where('subscriptions.seasonId = :season', { season })
+      .where('subscriptions.season_id = :season', { season })
       .andWhere('User.email = :email', { email })
       .getRawMany();
 

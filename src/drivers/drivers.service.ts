@@ -34,7 +34,7 @@ export class DriversService {
       .createQueryBuilder()
       .select('Driver.nickname')
       .innerJoin('Driver.subscriptions', 'subscriptions')
-      .where('subscriptions.seasonId = :season', { season })
+      .where('subscriptions.season_id = :season', { season })
       .andWhere('Driver.number = :number', { number })
       .getRawMany();
     return driver.length !== 0;
@@ -45,7 +45,7 @@ export class DriversService {
       .createQueryBuilder()
       .select('Driver.nickname')
       .innerJoin('Driver.subscriptions', 'subscriptions')
-      .where('subscriptions.seasonId = :season', { season })
+      .where('subscriptions.season_id = :season', { season })
       .andWhere('Driver.nickname = :nickname', { nickname })
       .getRawMany();
 
