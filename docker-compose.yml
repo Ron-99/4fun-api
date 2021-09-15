@@ -1,0 +1,14 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: "12345678"
+    volumes:
+      - /Users/ronaldogomes/Documents/Docker-Compose/PostgreSQL:/var/lib/postgresql/data
