@@ -53,4 +53,15 @@ export class UsersService {
 
     return { seasonSub: user.length !== 0, userExists: !!userExists };
   }
+
+  findByEmail(email: string) {
+    return this.repo.find({ email });
+  }
+
+  findById(id: number) {
+    if (!id) {
+      return null;
+    }
+    return this.repo.findOne({ id });
+  }
 }

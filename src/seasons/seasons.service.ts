@@ -35,7 +35,7 @@ export class SeasonsService {
     return await this.repo
       .createQueryBuilder()
       .select(
-        'Season.id, Season.number, ranks.name rank, Season.final_date_subscription date, categories.name category, categories.url_image urlImage',
+        'Season.id, Season.number, ranks.name rank, Season.initial_date initialDate, Season.final_date_subscription date, categories.name category, categories.url_image urlImage',
       )
       .innerJoin('Season.rank', 'ranks')
       .innerJoin('Season.category', 'categories')

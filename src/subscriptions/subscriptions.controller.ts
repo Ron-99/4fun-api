@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { DriversService } from 'src/drivers/drivers.service';
+import { AdminGuard } from 'src/guards/admin.guard';
 import { SeasonsService } from 'src/seasons/seasons.service';
 import { createSubscriptionDto } from './dtos/create-subscription.dto';
 import { SubscriptionsService } from './subscriptions.service';
@@ -20,6 +21,7 @@ export class SubscriptionsController {
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   async findAll() {
     return this.subscriptionsService.findAll();
   }

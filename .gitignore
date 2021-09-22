@@ -37,3 +37,6 @@ lerna-debug.log*
 
 # Envs
 .env.production
+
+serverless.yaml
+/src/lambda.ts

@@ -15,7 +15,7 @@ export class CreateUserDto {
   password: string;
 
   @IsString()
-  role: Roles;
+  role: Roles = Roles.User;
 
   @IsMobilePhone('pt-BR')
   mobilePhoneNumber: string;
