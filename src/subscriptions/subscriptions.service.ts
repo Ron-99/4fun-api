@@ -16,17 +16,27 @@ export class SubscriptionsService {
     return await this.repo.save(subscription);
   }
 
+  async findByDriver(driverId: number) {
+    return this.repo
+      .createQueryBuilder()
+      .select('*')
+      .where('Subscription.driver_id = :driverId', { driverId })
+      .getRawMany();
+  }
+
   async findAll() {
     const subscription = this.repo
       .createQueryBuilder()
       .select(
-        'drivers.nickname Piloto, drivers.number Numero, users.mobilePhoneNumber Contato, users.email Email, ranks.name Categoria, categories.name Jogo',
+        'users.first_name Nome, users.last_name Sobrenome, drivers.nickname Piloto, drivers.number Numero, users.mobilePhoneNumber Contato, users.email Email, ranks.name Categoria, categories.name Jogo',
       )
       .innerJoin('Subscription.driver', 'drivers')
       .innerJoin('Subscription.season', 'seasons')
       .innerJoin('drivers.users', 'users')
       .innerJoin('seasons.category', 'categories')
       .innerJoin('seasons.rank', 'ranks')
+      .where('seasons.id != 2')
+      .orderBy('Jogo')
       .getRawMany();
     return subscription;
   }

@@ -26,30 +26,16 @@ export class DriversService {
     return this.repo.findOne({ id });
   }
 
-  async numberExist(number: string, season: string) {
+  async numberExist(number: string) {
     while (number.length !== 3) {
       number = `0${number}`;
     }
-    const driver = await this.repo
-      .createQueryBuilder()
-      .select('Driver.nickname')
-      .innerJoin('Driver.subscriptions', 'subscriptions')
-      .where('subscriptions.season_id = :season', { season })
-      .andWhere('Driver.number = :number', { number })
-      .getRawMany();
-    return driver.length !== 0;
+    const driver = await this.repo.findOne({ number });
+    return { numberExists: !!driver };
   }
 
-  async nicknameExist(nickname: string, season: string) {
-    const driver = await this.repo
-      .createQueryBuilder()
-      .select('Driver.nickname')
-      .innerJoin('Driver.subscriptions', 'subscriptions')
-      .where('subscriptions.season_id = :season', { season })
-      .andWhere('Driver.nickname = :nickname', { nickname })
-      .getRawMany();
-
-    const driverId = await this.repo.findOne({ nickName: nickname });
-    return { driverExists: driver.length !== 0, driverId: driverId?.id };
+  async nicknameExist(nickname: string) {
+    const driver = await this.repo.findOne({ nickName: nickname });
+    return { nicknameExists: !!driver };
   }
 }

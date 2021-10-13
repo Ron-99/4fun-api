@@ -1,11 +1,13 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
   Post,
   Query,
   Session,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { DriversService } from 'src/drivers/drivers.service';
 import { AdminGuard } from 'src/guards/admin.guard';
@@ -17,6 +19,7 @@ import { User } from './user.entity';
 import { UsersService } from './users.service';
 
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
   constructor(
     private usersService: UsersService,
@@ -60,10 +63,7 @@ export class UsersController {
   }
 
   @Get('/email')
-  async emailExists(
-    @Query('email') email: string,
-    @Query('season') season: string,
-  ) {
-    return this.usersService.emailExist(email.toLowerCase(), season);
+  async emailExists(@Query('email') email: string) {
+    return this.usersService.emailExist(email.toLowerCase());
   }
 }

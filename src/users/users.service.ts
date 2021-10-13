@@ -39,19 +39,10 @@ export class UsersService {
     }
   }
 
-  async emailExist(email: string, season: string) {
-    const user = await this.repo
-      .createQueryBuilder()
-      .select('User.email')
-      .innerJoin('User.driver', 'drivers')
-      .innerJoin('drivers.subscriptions', 'subscriptions')
-      .where('subscriptions.season_id = :season', { season })
-      .andWhere('User.email = :email', { email })
-      .getRawMany();
-
+  async emailExist(email: string) {
     const userExists = await this.repo.findOne({ email });
 
-    return { seasonSub: user.length !== 0, userExists: !!userExists };
+    return { userExists: !!userExists };
   }
 
   findByEmail(email: string) {
@@ -63,5 +54,19 @@ export class UsersService {
       return null;
     }
     return this.repo.findOne({ id });
+  }
+
+  findUserAndDriverById(id: number) {
+    if (!id) {
+      return null;
+    }
+
+    return this.repo
+      .createQueryBuilder()
+      .select(
+        'first_name, last_name, email, role, mobile_phone_number, driver_id',
+      )
+      .where('id = :id', { id })
+      .getRawOne();
   }
 }

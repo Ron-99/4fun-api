@@ -10,7 +10,7 @@ export class CurrentUserMiddleware implements NestMiddleware {
     // @ts-ignore
     const { userId } = req.session || {};
     if (userId) {
-      const user = await this.usersService.findById(userId);
+      const user = await this.usersService.findUserAndDriverById(userId);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       req.currentUser = user;

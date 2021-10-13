@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Driver } from 'src/drivers/driver.entity';
 import {
   Column,
@@ -23,6 +24,7 @@ export class User {
   email: string;
 
   @Column({ name: 'password' })
+  @Exclude()
   password: string;
 
   @Column({ name: 'role', type: 'enum', enum: Roles, default: Roles.User })

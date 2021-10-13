@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Optional, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { PenaltiesService } from 'src/penalties/penalties.service';
 import { DriversService } from './drivers.service';
 import { CreateDriverDto } from './dtos/create-driver.dto';
@@ -20,10 +20,9 @@ export class DriversController {
   async exists(
     @Query('number') number: string,
     @Query('nickname') nickName: string,
-    @Query('season') season: string,
   ) {
-    if (!!number) return this.driversService.numberExist(number, season);
+    if (!!number) return this.driversService.numberExist(number);
 
-    if (!!nickName) return this.driversService.nicknameExist(nickName, season);
+    if (!!nickName) return this.driversService.nicknameExist(nickName);
   }
 }

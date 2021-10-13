@@ -35,8 +35,14 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Docker
+docker-compose.yml
+docker-production.yml
+Dockerfile
+
 # Envs
-.env.production
+.env.*
+.env
 
 serverless.yaml
 /src/lambda.ts

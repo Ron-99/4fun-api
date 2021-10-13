@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CategoriesService } from 'src/categories/categories.service';
 import { RanksService } from 'src/ranks/ranks.service';
+import { CurrentUser } from 'src/users/decorators/current-user.decorator';
+import { User } from 'src/users/user.entity';
 import { CreateSeasonDto } from './dtos/create-season.dto';
 import { SeasonsService } from './seasons.service';
 
@@ -22,7 +24,7 @@ export class SeasonsController {
   }
 
   @Get()
-  async findAll() {
-    return this.seasonsService.findAll();
+  async findAll(@CurrentUser() user: User) {
+    return this.seasonsService.findAll(user);
   }
 }
