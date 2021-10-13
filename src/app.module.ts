@@ -27,18 +27,9 @@ import { Subscription } from './subscriptions/subscription.entity';
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        console.log(config.get<string>('DB_HOST'));
-        console.log(config.get<number>('DB_PORT'));
-        console.log(config.get<string>('DB_NAME'));
-        console.log(config.get<string>('DB_USER'));
-        console.log(config.get<string>('DB_PASS'));
         return {
           type: 'postgres',
-          host: config.get<string>('DB_HOST'),
-          port: config.get<number>('DB_PORT'),
-          database: config.get<string>('DB_NAME'),
-          username: config.get<string>('DB_USER'),
-          password: config.get<string>('DB_PASS'),
+          url: config.get<string>('DATABASE_URL'),
           logging: true,
           synchronize: true,
           entities: [
