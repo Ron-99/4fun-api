@@ -27,6 +27,7 @@ import { Subscription } from './subscriptions/subscription.entity';
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
+        console.log(config.get<string>('DATABASE_URL'));
         return {
           type: 'postgres',
           url: config.get<string>('DATABASE_URL'),
