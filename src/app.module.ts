@@ -17,7 +17,6 @@ import { Season } from './seasons/season.entity';
 import { Penalty } from './penalties/penalty.entity';
 import { Driver } from './drivers/driver.entity';
 import { Subscription } from './subscriptions/subscription.entity';
-import * as PostgressConnectionStringParser from 'pg-connection-string';
 
 @Module({
   imports: [
@@ -28,20 +27,14 @@ import * as PostgressConnectionStringParser from 'pg-connection-string';
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        const { host, user, password, database, port } =
-          PostgressConnectionStringParser.parse(
-            config.get<string>('DATABASE_URL'),
-          );
-        console.log(host, user, password, database, port);
         return {
           type: 'postgres',
-          host: host,
-          port: parseInt(port),
-          database: database,
-          username: user,
-          password: password,
+          url: config.get<string>('DATABASE_URL'),
           logging: true,
           synchronize: true,
+          ssl: {
+            rejectUnauthorized: false,
+          },
           entities: [
             User,
             Rank,
