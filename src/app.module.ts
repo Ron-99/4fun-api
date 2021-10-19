@@ -17,6 +17,12 @@ import { Season } from './seasons/season.entity';
 import { Penalty } from './penalties/penalty.entity';
 import { Driver } from './drivers/driver.entity';
 import { Subscription } from './subscriptions/subscription.entity';
+import { TeamsModule } from './teams/teams.module';
+import { Team } from './teams/team.entity';
+import { TracksModule } from './tracks/tracks.module';
+import { Track } from './tracks/track.entity';
+import { RacesModule } from './races/races.module';
+import { Race } from './races/race.entity';
 
 @Module({
   imports: [
@@ -32,9 +38,9 @@ import { Subscription } from './subscriptions/subscription.entity';
           url: config.get<string>('DATABASE_URL'),
           logging: true,
           synchronize: true,
-          ssl: {
-            rejectUnauthorized: false,
-          },
+          // ssl: {
+          //   rejectUnauthorized: false,
+          // },
           entities: [
             User,
             Rank,
@@ -43,6 +49,9 @@ import { Subscription } from './subscriptions/subscription.entity';
             Penalty,
             Driver,
             Subscription,
+            Team,
+            Track,
+            Race,
           ],
         };
       },
@@ -54,6 +63,9 @@ import { Subscription } from './subscriptions/subscription.entity';
     SubscriptionsModule,
     RanksModule,
     CategoriesModule,
+    TeamsModule,
+    TracksModule,
+    RacesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

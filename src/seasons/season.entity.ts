@@ -1,4 +1,5 @@
 import { Category } from 'src/categories/category.entity';
+import { Race } from 'src/races/race.entity';
 import { Rank } from 'src/ranks/rank.entity';
 import { Subscription } from 'src/subscriptions/subscription.entity';
 import {
@@ -41,4 +42,8 @@ export class Season {
   @OneToMany(() => Subscription, (subscription) => subscription.driver)
   @JoinColumn()
   subscriptions: Subscription[];
+
+  @OneToMany(() => Race, (race) => race.driver)
+  @JoinColumn()
+  races: Race[];
 }

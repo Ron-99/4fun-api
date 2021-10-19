@@ -1,4 +1,5 @@
 import { Penalty } from 'src/penalties/penalty.entity';
+import { Race } from 'src/races/race.entity';
 import { Subscription } from 'src/subscriptions/subscription.entity';
 import { User } from 'src/users/user.entity';
 import {
@@ -32,4 +33,8 @@ export class Driver {
   @OneToMany(() => Subscription, (subscription) => subscription.driver)
   @JoinColumn()
   subscriptions: Subscription[];
+
+  @OneToMany(() => Race, (race) => race.driver)
+  @JoinColumn()
+  races: Race[];
 }
